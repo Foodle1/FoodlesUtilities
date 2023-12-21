@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 // ReSharper disable CheckNamespace
 // ReSharper disable Unity.PerformanceCriticalCodeInvocation
-namespace FoodlesUtilities
+namespace FoodlesUtilities.Observables
 {
     [Serializable]
     public struct ObservableVariable<T>

@@ -1,11 +1,7 @@
 using System;
 using System.Collections.Generic;
-/*#if UNITY_64
-using UnityEngine;
-using UnityEngine.Events;
-#endif*/
 
-namespace FoodlesUtilities
+namespace FoodlesUtilities.Observables
 {
     [Serializable]
     public class ObservableList<T> : List<T>
@@ -13,22 +9,8 @@ namespace FoodlesUtilities
         // Define the event that will be triggered when a value is added or changed
         public event Action CollectionChanged; 
         public event Action<T> ValueAdded;
+        public event Action<T> ValueRemoved;
         public event Action<T, T> ValueChanged;
-        
-/*#if UNITY_64
-        [SerializeField] private UnityEvent onCollectionChangedUnity = new UnityEvent();
-        [SerializeField] private UnityEvent<T, T> onValueChangedUnity = new UnityEvent<T, T>();
-        [SerializeField] private UnityEvent<T> onValueAddedUnity = new UnityEvent<T>();
-#endif
-
-        public ObservableList()
-        {
-#if UNITY_64
-            CollectionChanged += () => onCollectionChangedUnity?.Invoke();
-            ValueChanged += (oldValue, newValue) => onValueChangedUnity?.Invoke(oldValue, newValue);
-            ValueAdded += newValue => onValueAddedUnity?.Invoke(newValue);
-#endif
-        }*/
 
         // Override the Add method to trigger the event when a value is added
         public new void Add(T item)
@@ -37,10 +19,27 @@ namespace FoodlesUtilities
             OnValueAdded(item);
         }
 
-        // Method to trigger the event when a value is added
+        // Method to trigger the events when a value is added
         protected virtual void OnValueAdded(T item)
         {
             ValueAdded?.Invoke(item);
+            
+            CollectionChanged?.Invoke();
+        }
+        
+        
+        // Override the Remove method to trigger the event when a value is removed
+        public new void Remove(T item)
+        {
+            base.Remove(item);
+            
+            OnValueRemoved(item);
+        }
+        
+        // Method to trigger the events when a value is removed
+        protected virtual void OnValueRemoved(T item)
+        {
+            ValueRemoved?.Invoke(item);
             
             CollectionChanged?.Invoke();
         }
@@ -51,7 +50,7 @@ namespace FoodlesUtilities
             get => base[index];
             set
             {
-                T oldValue = base[index];
+                var oldValue = base[index];
                 base[index] = value;
                 OnValueChanged(oldValue, value);
             }
