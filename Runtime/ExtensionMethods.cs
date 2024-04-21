@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // ReSharper disable once CheckNamespace
 namespace FoodlesUtilities
@@ -399,6 +400,18 @@ namespace FoodlesUtilities
         public static void SetPositionAndRotation(this Rigidbody rb, Transform targetTransform)
         {
             rb.SetPositionAndRotation(targetTransform.position, targetTransform.rotation);
+        }
+
+        #endregion
+
+        #region Scene
+
+        /// <summary>
+        /// Reloads the current scene
+        /// </summary>
+        public static void ReloadCurrentScene()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         #endregion
