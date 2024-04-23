@@ -9,7 +9,7 @@ using UnityEngine.Events;
 namespace FoodlesUtilities.Observables
 {
     [Serializable]
-    public struct ObservableVariable<T>
+    public class ObservableVariable<T>
     {
         public event Action<T> OnValueChanged;
 
