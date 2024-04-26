@@ -44,7 +44,7 @@ namespace FoodlesUtilities
             };
         }
         
-        public static string AddSpacesToString(string text, bool preserveAcronyms = true)
+        public static string AddSpacesToString(this string text, bool preserveAcronyms = true)
         {
             if (string.IsNullOrWhiteSpace(text))
                 return string.Empty;
