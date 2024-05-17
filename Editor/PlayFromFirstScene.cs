@@ -45,7 +45,7 @@ namespace FoodlesUtilities.Editor
                 return;
             }
 
-            foreach(var gameObject in Object.FindObjectsOfType<GameObject>())
+            foreach(var gameObject in Object.FindObjectsByType<GameObject>(FindObjectsSortMode.None))
             {
                 gameObject.SetActive(false);
             }
