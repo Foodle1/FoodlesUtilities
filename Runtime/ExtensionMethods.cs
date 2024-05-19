@@ -227,8 +227,20 @@ namespace FoodlesUtilities
 
         public static T Next<T>(this List<T> list, T currentItem)
         {
-            var index = list.IndexOf(currentItem) + 1;
-            return list.Count >= index ? list[0] : list[index];
+            if (list == null || list.Count == 0)
+            {
+                throw new ArgumentException("The list cannot be null or empty.");
+            }
+
+            var currentIndex = list.IndexOf(currentItem);
+
+            if (currentIndex == -1)
+            {
+                throw new ArgumentException("The current item is not in the list.");
+            }
+
+            var nextIndex = (currentIndex + 1) % list.Count;
+            return list[nextIndex];
         }
 
         public static T Random<T>(this IEnumerable<T> enumerable)
