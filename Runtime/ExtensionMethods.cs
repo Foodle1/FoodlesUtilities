@@ -227,14 +227,14 @@ namespace FoodlesUtilities
 
         public static T Next<T>(this List<T> list, T currentItem)
         {
-            var next = list.ElementAtOrDefault(list.IndexOf(currentItem) + 1);
-            
-            if (next != null)
+            var index = list.IndexOf(currentItem) + 1;
+
+            if (index >= list.Count)
             {
-                return next;
+                index = 0;
             }
-            
-            return list.ElementAt(0);
+                
+            return list[index];
         }
 
         public static T Random<T>(this IEnumerable<T> enumerable)
