@@ -227,7 +227,7 @@ namespace FoodlesUtilities
 
         public static T Next<T>(this List<T> list, T currentItem)
         {
-            T? next = list.ElementAtOrDefault(list.IndexOf(currentItem) + 1);
+            var next = list.ElementAtOrDefault(list.IndexOf(currentItem) + 1);
             
             if (next != null)
             {
