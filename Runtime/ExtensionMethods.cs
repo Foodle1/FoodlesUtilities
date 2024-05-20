@@ -220,7 +220,7 @@ namespace FoodlesUtilities
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="enumerable"></param>
-        public static IEnumerable<T> Shuffle<T>(IEnumerable<T> enumerable)
+        public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> enumerable)
         {
             return enumerable.OrderBy(_ => _rng.Next()); // user453230 and Heinzi https://stackoverflow.com/questions/273313/randomize-a-listt
         }
@@ -286,7 +286,7 @@ namespace FoodlesUtilities
         }
 
         #endregion
-
+        
         #region Rotation
 
         /// <summary>
